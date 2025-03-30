@@ -1,2 +1,2 @@
 <h2 align="center">MOTION</h2>
-Gives song and movie recommendations based on your favorite movies!
+Gives song and movie recommendations based on your favorite movies! The user will be taken to a landing page where they will be prompted to input a movie that they enjoy. After clicking search, the user will be introduced to other movies similar to the input and 5 songs that match the genre/keywords of the input. If the input does not exist in our data-set from Kaggle, the user will be taken to an error page explaining the issue.
