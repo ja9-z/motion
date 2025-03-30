@@ -113,33 +113,11 @@ function App() {
         });
     };
 
-    const [data, setData] = useState({ movies: [] });
-
-    useEffect(()=>{
-        fetch("/getMovieRecs").then(
-            res =>res.json()
-        ).then(
-            data =>{
-                setData(data)
-                console.log(data)
-            }
-        )
-    }, [])
+    
 
     return (
         <form onSubmit={handleSubmit}>
-            <div>
-            <h1>texttt</h1>
-            {(typeof data.movies === "undefined") ? (
-                <p>still loading...</p>
-            ): (
-                data.movies.map((member,i) => (
-                    <p key = {i}>{member}</p>
-                ))
-            )
-            }
             
-        </div>
             <input 
                 type="text" 
                 value={movie} 
