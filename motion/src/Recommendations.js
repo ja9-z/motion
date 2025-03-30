@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Recommendations.css"
-import image1 from "./assets/reel.png";
+import image1 from "./assets/filmmmm.png";
+import starPink from "./assets/pinkStarr.png";
+import cd from "./assets/discc.png";
+import starBlue from "./assets/blueStarr.png";
 
 function Recommendations() {
     const [data, setData] = useState({ movies: [] });
@@ -30,27 +33,49 @@ function Recommendations() {
 
     return (
         <div className = "Recommendations">
-            <div className = "recDiv1">
-                <div className = "horizontalDiv">
-                    <div>
+            <div>
+                <div className = "recDiv2">
+                <div style = {{zIndex: 1}}>
+                    <div style={{paddingLeft: "50vh", paddingBottom: "10vh"}}>
+                        <div>
+                            <h1 style = {{fontSize: 60, color: "#0E233E" }}>movies</h1>
+                            {data.movies.length === 0 ? (
+                            <p>Still loading...</p>
+                            ) : (
+                            data.movies.map((mov, i) => <p key={i} className = "individDiv1" style = {{fontSize: 18}}>{mov}</p>)
+                            )}
+                        </div>
+
+                    </div>
+                    <div className = "imageDiv">
                         <img src={image1}>
                         </img>
                     </div>
-                    <h1>movies</h1>
-                    {data.movies.length === 0 ? (
+             </div>
+                    <div style={{position: "absolute", marginTop: 200, zIndex: 0, marginLeft: -400}}>
+                <img src = {starPink}></img>
+            </div>
+                </div>
+                    
+            </div>
+            
+        
+            <div></div>
+            <div className = "recDiv2">
+                    <div className = "imageDiv2" style = {{zIndex:1}}>
+                        <img src={cd}>
+                        </img>
+                    </div>
+                <div style = {{display: "flex", flexDirection: "column", zIndex:1}}>
+                    <h1 style = {{fontSize: 60, color: "#4E4B9A" }}>songs</h1>
+                    {data2.songs.length === 0 ? (
                         <p>Still loading...</p>
                     ) : (
-                        data.movies.map((mov, i) => <p key={i}>{mov}</p>)
+                        data2.songs.map((s, i) => <p key={i} className = "individDiv1" style = {{fontSize: 18}}>{s}</p>)
                     )}
                 </div>
-            </div>
-            <div className = "recDiv2">
-                <h1>songs</h1>
-                {data2.songs.length === 0 ? (
-                    <p>Still loading...</p>
-                ) : (
-                    data2.songs.map((s, i) => <p key={i}>{s}</p>)
-                )}
+                <div style ={{position: "absolute", zIndex: 0, marginRight: -400}}>
+                <img src = {starBlue}></img></div>
             </div>
         </div>
     );
