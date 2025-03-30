@@ -69,10 +69,8 @@ def getMovRecs():
 def getSongRecs():
     songs=spotify_recommendation.get_recommendation(movie_name)
     return jsonify({"songs": songs})
-    
-#@app.route("/<usr>/spot")
-#def user(usr):
-    
+
+
 
 if __name__=='__main__':
     app.run(debug = True)
