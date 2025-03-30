@@ -1,5 +1,19 @@
-.frame {
-  background-color: #f2f2f2;
+*{
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+  @keyframes float{
+      0%, 100% {
+          transform: translateY(0);
+      }
+      50%{
+          transform: translateY(-20px);
+      }
+  }
+  .frame {
+  background-color: linear-gradient(135deg, #240303, #7a8ba3);
   flex-direction: column;
   display: flex;
   align-items: center;
@@ -24,7 +38,7 @@
  .frame .text-wrapper {
   -webkit-text-stroke: 1px #000000;
   color: #4e4b9a;
-  font-family: "Poppins-ExtraBold", Helvetica;
+  font-family: "Poppins", Helvetica;
   font-size: 96px;
   font-weight: 800;
   left: 0;
@@ -41,6 +55,7 @@
 
 
  .frame .star {
+  animation: float 4s ease-in-out infinite;
   height: 65px;
   left: 508px;
   position: absolute;
@@ -63,6 +78,7 @@
 
 
  .frame .star-2 {
+  animation: float 4s ease-in-out infinite;
   height: 275px;
   left: 735px;
   position: absolute;
@@ -136,6 +152,7 @@
   position: absolute;
   top: 90px;
   width: 501px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
  }
 
 
@@ -189,6 +206,7 @@
 
 
  .frame .star-3 {
+  animation: float 4s ease-in-out infinite;
   height: 242px;
   left: 0;
   position: absolute;
@@ -200,9 +218,12 @@
 
 
  .frame .star-4 {
+  animation: float 4s ease-in-out infinite;
   height: 144px;
   left: 37px;
   position: absolute;
   top: 320px;
   width: 87px;
  }
+
+
