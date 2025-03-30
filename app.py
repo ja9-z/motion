@@ -51,21 +51,14 @@ def home():
         return render_template("login.html")
         """
 
-@app.route("/getMovieRecs")
+@app.route("/getMovieRecs", methods = ["GET"])
 def getMovRecs():
-    movies = movie_recommendation.get_recommendations("interstellar", movie_recommendation.cosine_sim2)
+    movies = movie_recommendation.get_recommendations(movie_name, movie_recommendation.cosine_sim2)
     
     return jsonify({"movies": movies})
 
-    """
-    MovieRecommendations = movie_recommendation.get_recommendations(movie_name, movie_recommendation.cosine_sim2)
-    if MovieRecommendations:
-        return render_template('recommendation.html', movies=MovieRecommendations, songs=spotify_recommendation.get_recommendation(movie_name))
-    else:
-        return render_template('recommendation.html', movies=[], message="NO MOTION DETECTED")
-        """
 
-@app.route("/getSongRecs")
+@app.route("/getSongRecs", methods = ["GET"])
 def getSongRecs():
     songs=spotify_recommendation.get_recommendation(movie_name)
     return jsonify({"songs": songs})
