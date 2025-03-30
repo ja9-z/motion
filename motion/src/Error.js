@@ -12,10 +12,7 @@ function ErrorPage() {
             <p className="text">NO <br /> MOTION</p>
         </div>
         <div className="errorMessage">
-          <h1>sorry, movie not found!</h1>
-          <div className="emoji" role="img" aria-label="Crying face">
-            😢
-          </div>
+          <h1>😢movie not found!😢</h1>
         </div>
       </div>
     );
