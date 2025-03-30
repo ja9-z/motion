@@ -4,11 +4,14 @@ import image1 from "./assets/filmmmm.png";
 import starPink from "./assets/pinkStarr.png";
 import cd from "./assets/discc.png";
 import starBlue from "./assets/blueStarr.png";
+import { useNavigate } from "react-router-dom";
 
 function Recommendations() {
     const [data, setData] = useState({ movies: [] });
     const [data2, setData2] = useState({ songs: [] });
     const hasFetched = useRef(false)
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (hasFetched.current) return;
@@ -23,13 +26,17 @@ function Recommendations() {
                 const songRes = await fetch("http://127.0.0.1:5000/getSongRecs");
                 const songData = await songRes.json();
                 setData2({ songs: songData.songs || [] });
+                if (!movieData.movies || movieData.movies.length === 0 || !songData.songs || songData.songs.length === 0) {
+                    navigate("/error");
+                }
             } catch (error) {
                 console.error("Error fetching recommendations:", error);
+                navigate("/error");
             }
         };
 
         fetchRecommendations();
-    },[hasFetched]); // Depend on `fetched` to prevent duplicate calls
+    },[navigate]); // Depend on `fetched` to prevent duplicate calls
 
     return (
         <div className = "Recommendations">
