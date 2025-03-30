@@ -1,6 +1,9 @@
-/*import logo from './logo.svg';
-import './App.css';
 
+import './App.css';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
+
+import Recommendations from "./Recommendations"
+/*
 function App() {
   return (
     <div className="App">
@@ -82,7 +85,21 @@ function App() {
 }
 
 export default App;*/
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+
+function AnimatedRoutes() {
+  const location = useLocation();  // ✅ Tracks location changes
+
+  return (
+      
+          <Routes location={location} key={location.pathname}>  
+              <Route path="/recs" element={<Recommendations />} />
+              
+              
+          </Routes>
+  );
+}
 
 function App() {
     const [movie, setMovie] = useState("");
@@ -96,8 +113,33 @@ function App() {
         });
     };
 
+    const [data, setData] = useState({ movies: [] });
+
+    useEffect(()=>{
+        fetch("/getMovieRecs").then(
+            res =>res.json()
+        ).then(
+            data =>{
+                setData(data)
+                console.log(data)
+            }
+        )
+    }, [])
+
     return (
         <form onSubmit={handleSubmit}>
+            <div>
+            <h1>texttt</h1>
+            {(typeof data.movies === "undefined") ? (
+                <p>still loading...</p>
+            ): (
+                data.movies.map((member,i) => (
+                    <p key = {i}>{member}</p>
+                ))
+            )
+            }
+            
+        </div>
             <input 
                 type="text" 
                 value={movie} 
