@@ -4,55 +4,55 @@ import React, { useState, useEffect } from "react";
 function Recommendations() {
     
 
-    const [mdata, setData] = useState({ movies: [] });
+    const [data, setData] = useState({ movies: [] });
 
-    const [sdata, setData2] = useState({songs: []});
+    const [data2, setData2] = useState({songs: []});
 
     useEffect(()=>{
         fetch("/getMovieRecs").then(
             res =>res.json()
         ).then(
             data =>{
-                setData(mdata)
-                console.log(mdata)
+                setData(data)
+                console.log(data)
             }
         )
     }, [])
 
+    
     useEffect(()=>{
         fetch("/getSongRecs").then(
             res =>res.json()
         ).then(
-            data =>{
-                setData(sdata)
-                console.log(sdata)
+            data2 =>{
+                setData2(data2)
+                console.log(data2)
             }
         )
     }, [])
+    
 
     return(
         <div>
         <h1>movie list</h1>
-        {(typeof mdata.movies === "undefined") ? (
+        {(typeof data.movies === "undefined") ? (
             <p>still loading...</p>
         ): (
-            mdata.movies.map((mov,i) => (
+            data.movies.map((mov,i) => (
                 <p key = {i}>{mov}</p>
             ))
         )
         }
-        <div>
 
         <h1>song list</h1>
-        {(typeof sdata.songs === "undefined") ? (
+        {(typeof data2.songs === "undefined") ? (
             <p>still loading...</p>
         ): (
-            sdata.songs.map((son,i) => (
-                <p key = {i}>{son}</p>
+            data2.songs.map((s,i) => (
+                <p key = {i}>{s}</p>
             ))
         )
         }
-        </div>
         
         </div>
     )
