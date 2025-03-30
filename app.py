@@ -1,69 +1,42 @@
-from flask import Flask, redirect, url_for, request, render_template, flash, jsonify
-import pandas as pd
-import numpy as np
-
+from flask import Flask, request, jsonify
 from flask_cors import CORS
-
-
-#import python file
 import movie_recommendation
 import spotify_recommendation
 
-#movie_recommendation.get_recommendations('Interstellar', movie_recommendation.cosine_sim2)
-
+# Initialize the movie_name variable
 movie_name = ""
 
-
 # Flask constructor
-app = Flask(__name__) 
-CORS(app)  
+app = Flask(__name__)
+CORS(app)
+
 @app.route("/", methods=["POST"])
 def receive_movie():
+    global movie_name  # Declare movie_name as global
     data = request.json  
     movie_name = data.get("movie")
-
-    print("Received movie:", movie_name)
-    print(movie_recommendation.get_recommendations(movie_name, movie_recommendation.cosine_sim2))  # Print to console
-    return "success"
-"""
-    if(request.method == "POST"):
-        #can check if request.form["nm"] not blank, do more stuff with it
-        movie_name = data.get("movie", "").strip()
-        print("Received movie:", data.get("movie"))
-        return redirect(url_for("motion", mv = movie_name))
-    else:
-        return render_template("login.html")
-    #data.get("movie")
-    #return redirect(url_for("motion", mv = data.get("movie")))
-
-    print("Received movie:", data.get("movie"))  # Print to console
-    return "Success""""""
-
-
-
-@app.route("/", methods = ["POST", "GET"])
-def home():
-    if(request.method == "POST"):
-        #can check if request.form["nm"] not blank, do more stuff with it
-        user = request.form["nm"]
-        return redirect(url_for("user", usr = user))
-    else:
-        return render_template("login.html")
-        """
-
-@app.route("/getMovieRecs", methods = ["GET"])
-def getMovRecs():
-    movies = movie_recommendation.get_recommendations(movie_name, movie_recommendation.cosine_sim2)
     
+    # Print to console to verify
+    print(f"Received movie: {movie_name}")
+    return "success"
+
+@app.route("/getMovieRecs", methods=["GET"])
+def getMovRecs():
+    global movie_name  # Declare movie_name as global
+    if not movie_name:
+        return jsonify({"error": "No movie selected"}), 400
+    
+    movies = movie_recommendation.get_recommendations(movie_name, movie_recommendation.cosine_sim2)
     return jsonify({"movies": movies})
 
-
-@app.route("/getSongRecs", methods = ["GET"])
+@app.route("/getSongRecs", methods=["GET"])
 def getSongRecs():
-    songs=spotify_recommendation.get_recommendation(movie_name)
+    global movie_name  # Declare movie_name as global
+    if not movie_name:
+        return jsonify({"error": "No movie selected"}), 400
+    
+    songs = spotify_recommendation.get_recommendation(movie_name)
     return jsonify({"songs": songs})
 
-
-
-if __name__=='__main__':
-    app.run(debug = True)
+if __name__ == '__main__':
+    app.run(debug=True)

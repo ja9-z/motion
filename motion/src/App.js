@@ -27,7 +27,7 @@ export default function App() {
       <Router>
         <Routes>
           <Route index element = {<Home />} />
-          <Route path = "/home" element = {<Home />} />
+          <Route path = "/" element = {<Home />} />
           <Route path = "/recs" element = {<Recommendations />} />
         </Routes>
       </Router>

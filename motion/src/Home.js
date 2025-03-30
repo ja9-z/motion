@@ -16,13 +16,28 @@ function Home() {
    const [movie, setMovie] = useState("");
    const navigate = useNavigate();
    const handleSubmit = async (e) => {
-       e.preventDefault();
-       await fetch("http://127.0.0.1:5000/", {
-           method: "POST",
-           headers: { "Content-Type": "application/json" },
-           body: JSON.stringify({ movie }),
-       });
-   };
+    e.preventDefault();
+    if (!movie) {
+        alert("Please enter a movie name");
+        return;
+    }
+
+    // Send the movie name to the backend
+    const response = await fetch("http://127.0.0.1:5000/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ movie }),
+    });
+
+    const data = await response.json();
+    console.log(data); // Verify success response
+
+    // Navigate to the recommendations page
+    navigate("/recs");
+};
+
 
 
    /*return (
@@ -82,13 +97,12 @@ function Home() {
 
       <div className="enter-a-movie-and-wrapper">
       <form onSubmit={handleSubmit}> 
-           <input
-               type="text"
-               value={movie}
-               onChange={(e) => setMovie(e.target.value)}
-               class = "enter-a-movie-and"
-               placeholder="Enter a movie"
-           />
+      <input
+                    type="text"
+                    value={movie}
+                    onChange={(e) => setMovie(e.target.value)}
+                    placeholder="Enter movie name"
+                />
            {/*<button type="submit" onClick={() => navigate("/recs")}>Submit</button>*/}
        </form>
       </div>
