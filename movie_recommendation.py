@@ -26,12 +26,8 @@ indices = pd.Series(df2.index, index=df2['title']).drop_duplicates()
 
 def get_recommendations(title, cosine_sim=cosine_sim):
     if title.title() not in indices:
-<<<<<<< Updated upstream:movie_recommendation.py
-        return []
-    
-=======
         return [] 
->>>>>>> Stashed changes:backend/movie_recommendation.py
+
     idx = indices[title.title()]
     sim_scores = list(enumerate(cosine_sim[idx])) #pairwise similarity score
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True) #sort movies based on score
