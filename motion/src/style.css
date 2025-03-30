@@ -13,12 +13,14 @@
       }
   }
   .frame {
-  background-color: linear-gradient(135deg, #240303, #7a8ba3);
+  background: linear-gradient(0deg, #f1ddf1, #a780fa);
   flex-direction: column;
   display: flex;
   align-items: center;
   justify-content: center;
   height: fit-content;
+  min-width: 100vw;  /* Makes it span the full viewport width */
+  min-height: 100vh; /* Makes it span the full viewport height */
  }
 
 
@@ -210,7 +212,7 @@
   height: 242px;
   left: 0;
   position: absolute;
-  top: 235px;
+  top: 275px;
   width: 287px;
  }
 
