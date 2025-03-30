@@ -1,12 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./Recommendations.css"
+<<<<<<< Updated upstream
 import image1 from "./assets/reel.png";
+=======
+import { useNavigate } from "react-router-dom";
+>>>>>>> Stashed changes
 
 function Recommendations() {
     const [data, setData] = useState({ movies: [] });
     const [data2, setData2] = useState({ songs: [] });
     const hasFetched = useRef(false)
 
+<<<<<<< Updated upstream
     useEffect(() => {
         if (hasFetched.current) return;
         hasFetched.current = true;
@@ -24,6 +29,28 @@ function Recommendations() {
                 console.error("Error fetching recommendations:", error);
             }
         };
+=======
+    const [data2, setData2] = useState({songs: []});
+    
+    const navigate = useNavigate();
+
+    useEffect(()=>{
+        fetch("/getMovieRecs")
+            .then(res => res.json())
+            .then(data => {
+                if (!data.movies || data.movies.length === 0) {
+                    navigate("/error"); // Redirect to Error.js if empty
+                } else {
+                    setData(data);
+                    console.log(data);
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching movie recommendations:", error);
+                navigate("/error"); // Redirect on fetch error
+            });
+    }, [navigate]);
+>>>>>>> Stashed changes
 
         fetchRecommendations();
     },[hasFetched]); // Depend on `fetched` to prevent duplicate calls
