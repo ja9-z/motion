@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 function Recommendations() {
     const [data, setData] = useState({ movies: [] });
     const [data2, setData2] = useState({ songs: [] });
-    const [fetched, setFetched] = useState(false); // Prevent double-fetching
+    const hasFetched = useRef(false)
 
     useEffect(() => {
-        if (fetched) return; // Prevent duplicate fetches
-        setFetched(true); // Mark as fetched
+        if (hasFetched.current) return;
+        hasFetched.current = true;
 
         const fetchRecommendations = async () => {
             try {
@@ -24,7 +24,7 @@ function Recommendations() {
         };
 
         fetchRecommendations();
-    }, [fetched]); // Depend on `fetched` to prevent duplicate calls
+    },[hasFetched]); // Depend on `fetched` to prevent duplicate calls
 
     return (
         <div>
