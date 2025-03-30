@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import "./Recommendations.css"
+import image1 from "./assets/reel.png";
 
 function Recommendations() {
     const [data, setData] = useState({ movies: [] });
@@ -27,20 +29,29 @@ function Recommendations() {
     }, [fetched]); // Depend on `fetched` to prevent duplicate calls
 
     return (
-        <div>
-            <h1>Movie Recommendations</h1>
-            {data.movies.length === 0 ? (
-                <p>Still loading...</p>
-            ) : (
-                data.movies.map((mov, i) => <p key={i}>{mov}</p>)
-            )}
-
-            <h1>Song Recommendations</h1>
-            {data2.songs.length === 0 ? (
-                <p>Still loading...</p>
-            ) : (
-                data2.songs.map((s, i) => <p key={i}>{s}</p>)
-            )}
+        <div className = "Recommendations">
+            <div className = "recDiv1">
+                <div className = "horizontalDiv">
+                    <div>
+                        <img src={image1}>
+                        </img>
+                    </div>
+                    <h1>movies</h1>
+                    {data.movies.length === 0 ? (
+                        <p>Still loading...</p>
+                    ) : (
+                        data.movies.map((mov, i) => <p key={i}>{mov}</p>)
+                    )}
+                </div>
+            </div>
+            <div className = "recDiv2">
+                <h1>songs</h1>
+                {data2.songs.length === 0 ? (
+                    <p>Still loading...</p>
+                ) : (
+                    data2.songs.map((s, i) => <p key={i}>{s}</p>)
+                )}
+            </div>
         </div>
     );
 }
