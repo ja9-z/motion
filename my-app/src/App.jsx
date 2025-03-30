@@ -30,7 +30,7 @@ export const Frame = () => {
         </p>
 
         <div className="enter-a-movie-and-wrapper">
-          <p className="enter-a-movie-and">enter a movie and get song recs!</p>
+          <p className="enter-a-movie-and">enter a movie and get song/movie recs!</p>
         </div>
 
         <div className="image-wrapper">
