@@ -5,6 +5,7 @@ import { BrowserRouter, BrowserRouter as Router, Routes, Route, useLocation} fro
 import Recommendations from "./Recommendations"
 import Home from "./Home"
 import React, { useState, useEffect, useRef } from "react";
+import Error from "./Error";
 
 /*
 function AnimatedRoutes() {
@@ -29,6 +30,7 @@ export default function App() {
           <Route index element = {<Home />} />
           <Route path = "/" element = {<Home />} />
           <Route path = "/recs" element = {<Recommendations />} />
+          <Route path="/error" element={<Error />} />
         </Routes>
       </Router>
     </div>
